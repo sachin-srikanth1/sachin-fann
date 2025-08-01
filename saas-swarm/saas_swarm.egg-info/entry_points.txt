@@ -1,0 +1,3 @@
+[console_scripts]
+saas-swarm-api = saas_swarm.api.main:app
+swarm = saas_swarm.cli.main:cli

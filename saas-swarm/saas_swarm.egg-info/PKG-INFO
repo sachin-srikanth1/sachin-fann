@@ -1,0 +1,175 @@
+Metadata-Version: 2.4
+Name: saas-swarm
+Version: 0.1.0
+Summary: Swarm-as-a-Service platform for lightweight AI agent collaboration
+Home-page: https://github.com/saas-swarm/saas-swarm
+Author: SaaS-Swarm Team
+Author-email: team@saas-swarm.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.104.1
+Requires-Dist: uvicorn[standard]>=0.24.0
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: pyyaml>=6.0.1
+Requires-Dist: click>=8.1.7
+Requires-Dist: asyncio-mqtt>=0.16.1
+Requires-Dist: websockets>=12.0
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: httpx>=0.25.2
+Requires-Dist: pytest>=7.4.3
+Requires-Dist: pytest-asyncio>=0.21.1
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: langchain>=0.1.0
+Requires-Dist: langchain-openai>=0.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Requires-Dist: mypy>=0.950; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=5.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# SaaS-Swarm: Swarm-as-a-Service Platform
+
+A modular and efficient Python platform for implementing lightweight, trainable AI agent swarms with flexible topologies and real-time collaboration.
+
+## Features
+
+- **Modular Agent System**: Define lightweight AI agents with custom inference functions
+- **Flexible Swarm Topologies**: Mesh, Star, Ring, and Hierarchical configurations
+- **Real-time Communication**: Asynchronous message passing between agents
+- **Advanced Tool Integration**: OpenAI research, email sending, and pluggable external tools
+- **Feedback System**: Reward signals and adaptation mechanisms
+- **Neural Core**: Lightweight NumPy-based neural networks
+- **REST API**: FastAPI endpoints for swarm management
+- **CLI Tools**: Command-line interface for swarm configuration and deployment
+- **OpenAI Integration**: Research and content generation using GPT models
+- **Email Functionality**: SMTP-based email sending with configurable providers
+
+## Quick Start
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment (see SETUP_GUIDE.md for details)
+cp env.example .env
+# Edit .env with your OpenAI API key and email credentials
+
+# Test your setup
+python3 test_enhanced_swarm.py
+
+# Run enhanced email writer example
+python3 saas_swarm/examples/enhanced_email_writer.py
+```
+
+## Architecture
+
+```
+saas-swarm/
+├── core/           # Base agent, swarm, and message classes
+├── models/         # Neural network modules
+├── tools/          # Pluggable external tools
+├── api/            # FastAPI server
+├── cli/            # CLI logic
+├── examples/       # Sample swarms
+└── tests/          # Unit tests
+```
+
+## Core Components
+
+### Agent
+- Encapsulates input/output sizes and inference functions
+- Supports online learning and feedback handling
+- Optional tool integration via ToolRegistry
+
+### SwarmTopology
+- Base class with pluggable topologies
+- Manages agent messaging and execution
+- Supports Mesh, Star, Ring, and Hierarchical patterns
+
+### MessageBus
+- Asynchronous communication layer
+- In-memory queues with extensibility for Redis/ZeroMQ
+
+### FeedbackLoop
+- Evaluates swarm output and propagates reward signals
+- Enables RL-like adaptation and supervised fine-tuning
+
+## API Endpoints
+
+- `POST /run/{swarm_id}` - Run a swarm with given input
+- `POST /feedback/{agent_id}` - Submit feedback signal to agent
+- `GET /swarms` - List all swarms
+- `GET /agents` - List all agents
+
+## Examples
+
+See `examples/` directory for sample swarms:
+- **Enhanced Email Writer**: OpenAI research + email sending
+- **Route Optimization**: Multi-agent route planning
+- **Code Review**: Hierarchical code analysis
+- **Basic Email Writer**: Simple research and writing agents
+
+## Enhanced Features
+
+### OpenAI Integration
+- Research topics using GPT models
+- Generate content and summaries
+- Configurable models and parameters
+
+### Email Functionality
+- SMTP-based email sending
+- Support for Gmail, Outlook, Yahoo, and custom providers
+- Secure credential management
+
+### Feedback Loops
+- Evaluate research quality
+- Track email delivery and response rates
+- Adapt agent behavior based on feedback
+
+## Development
+
+```bash
+# Run tests
+python -m pytest tests/
+
+# Start API server
+python -m saas_swarm.api.main
+
+# Run CLI
+python -m saas_swarm.cli.main
+```
+
+## Extensibility
+
+The platform is designed for easy extension:
+- Add new agent types
+- Implement custom swarm topologies
+- Integrate external tools and APIs
+- Deploy to edge devices or WASM 
